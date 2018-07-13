@@ -28,3 +28,5 @@ document.body.appendChild(renderer.domElement);
     cube.rotation.y += 0.01;
     renderer.render(scene, camera);
 }());
+
+// /https://medium.com/@soffritti.pierfrancesco/how-to-organize-the-structure-of-a-three-js-project-77649f58fa3f
