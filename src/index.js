@@ -2,31 +2,52 @@ import {
     Scene,
     PerspectiveCamera,
     WebGLRenderer,
-    BoxGeometry,
-    MeshBasicMaterial,
-    Mesh
+    Color
 } from 'three';
-
-const scene = new Scene();
-var camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-var renderer = new WebGLRenderer();
+import Cube from './components/cube'
 
 
-var geometry = new BoxGeometry(1, 1, 1);
-var material = new MeshBasicMaterial({ color: 0xff00ff });
-var cube = new Mesh(geometry, material);
-scene.add(cube);
+(function () {
 
-camera.position.z = 5;
+    const scene = new Scene();
+    const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new WebGLRenderer();
+    const cube = new Cube()
+    // stock all scene element 
+    let objects = [cube]
 
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
 
-(function animate() {
-    requestAnimationFrame(animate);
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-    renderer.render(scene, camera);
-}());
+    init()
+    addObjects(objects, scene)
+    animate(objects, scene, camera, renderer)
 
-// /https://medium.com/@soffritti.pierfrancesco/how-to-organize-the-structure-of-a-three-js-project-77649f58fa3f
+    function init() {
+        scene.background = new Color('#202020');
+        camera.position.z = 5;
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+    }
+
+    /**
+     * 
+     * @param {elements} elements - Array of Three element to add to the scene
+     * @param {scene} scene - Three scene 
+     */
+    function addObjects(elements, scene) {
+        elements.forEach(e => scene.add(e.getElement()))
+    }
+
+    /**
+     * refresh loop
+     */
+    function animate() {
+        requestAnimationFrame(animate);
+        objects.forEach(e => e.update())
+        renderer.render(scene, camera);
+    };
+})();
+
+
+// https://medium.com/@soffritti.pierfrancesco/how-to-organize-the-structure-of-a-three-js-project-77649f58fa3f
+
+// https://rawgit.com/PierfrancescoSoffritti/Doodling/master/6.%20NeonCrystal/index.html
