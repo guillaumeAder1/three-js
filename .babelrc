@@ -1,0 +1,14 @@
+{
+    "presets": [
+        "env",
+        "react",
+        "stage-0"
+    ],
+    "plugins": [
+        "transform-async-to-generator",
+        "add-module-exports",
+        "transform-object-rest-spread",
+        "transform-es2015-arrow-functions",
+        "react-hot-loader/babel"
+    ]
+}
