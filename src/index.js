@@ -10,6 +10,7 @@ import {
 import * as THREE from 'three'
 import Cube from './components/graphic/cube'
 import Wire from './components/graphic/wire'
+import Speaker from './components/graphic/speaker'
 
 
 (function () {
@@ -20,10 +21,15 @@ import Wire from './components/graphic/wire'
     const renderer = new WebGLRenderer();
     const light = buildLights(scene)
 
+
     //const cube = new Cube(scene, cubeCamera)
     const wire = new Wire(scene, cubeCamera)
+
+    // speaker mesh
+    const speaker = new Speaker(scene)
+
     // stock all scene element 
-    let objects = [wire]
+    let objects = [wire, speaker]
 
     window.scene = scene
     window.THREE = THREE
