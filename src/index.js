@@ -7,6 +7,7 @@ import {
     SpotLight,
     Color
 } from 'three';
+import * as THREE from 'three'
 import Cube from './components/graphic/cube'
 import Wire from './components/graphic/wire'
 
@@ -23,6 +24,9 @@ import Wire from './components/graphic/wire'
     const wire = new Wire(scene, cubeCamera)
     // stock all scene element 
     let objects = [wire]
+
+    window.scene = scene
+    window.THREE = THREE
 
 
     init()
