@@ -13,6 +13,7 @@ module.exports = (env) => {
         devtool: 'source-map',
         entry: {
             index: path.resolve(__dirname, './src/index')
+
         },
 
         output: {

@@ -2,23 +2,23 @@ import {
     BoxGeometry,
     MeshBasicMaterial,
     MeshPhongMaterial,
+    PointsMaterial,
+    AdditiveBlending,
     Mesh
 } from 'three';
 
 
 
 class Cube {
-    constructor() {
+    constructor(scene, cubeCamera) {
         this.geometry = new BoxGeometry(1, 1, 1);
-        this.material = new MeshPhongMaterial({ color: 0xff00ff });
-        // this.material = new THREE.PointsMaterial({ map: map, color: "#fff", size: 0.04, blending: AdditiveBlending, transparent: true, opacity: 0.5, alphaTest: 0.25 });
+        this.material = new MeshPhongMaterial({ color: '#aaa', wireframe: true });
+        //this.material = new PointsMaterial({ color: "#fff", size: 0.04, blending: AdditiveBlending, transparent: true, opacity: 0.5, alphaTest: 0.25 });
         this.cube = new Mesh(this.geometry, this.material);
-        return this
+
+        scene.add(this.cube)
     }
 
-    getElement() {
-        return this.cube
-    }
     /**
      * animation to be render in the refresh loop
      */
