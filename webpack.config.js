@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = (env) => {
 
@@ -58,11 +58,13 @@ module.exports = (env) => {
         },
         plugins: [
             new CleanWebpackPlugin(['dist']),
-            // new ExtractTextPlugin({ filename: 'style.css' }),
             new HtmlWebPackPlugin({
                 template: "./src/index.html",
                 filename: "index.html"
             }),
+            new CopyWebpackPlugin([
+                { from: 'public/**', to: '' }
+            ]),
             new webpack.NamedChunksPlugin(),
             new webpack.HotModuleReplacementPlugin()
         ],
