@@ -24,16 +24,17 @@ import FrequencyAnalyzer from './components/analyze/frequencyAnalyzer';
     const light = buildLights(scene)
 
     // analayse 
-    const analyzer = new FrequencyAnalyzer()
+    const fa = new FrequencyAnalyzer()
 
     //const cube = new Cube(scene, cubeCamera)
     const wire = new Wire(scene, cubeCamera)
 
     // speaker mesh
-    const speaker = new Speaker(scene)
+    //const speaker = new Speaker(scene)
 
     // stock all scene element 
-    let objects = [wire, speaker]
+    // let objects = [wire, speaker]
+    let objects = [wire]
 
     window.scene = scene
     window.THREE = THREE
@@ -81,9 +82,10 @@ import FrequencyAnalyzer from './components/analyze/frequencyAnalyzer';
      */
     function animate() {
 
-        requestAnimationFrame(animate.bind(this));
-        console.log(analyzer.frequencies)
-        objects.forEach(e => e.update())
+        requestAnimationFrame(animate);
+        if (fa.getFrequencies()) {
+            objects.forEach(e => e.update())
+        }
         renderer.render(scene, camera);
     };
 })();

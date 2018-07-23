@@ -3,8 +3,10 @@
 
 class FrequencyAnalyzer {
     constructor() {
-        const player = this.createAudioElement();
-        this.data = this.createAnalyzer(player);
+        this.player = this.createAudioElement();
+        this.data = this.createAnalyzer(this.player);
+        this.isPlaying = true
+        this.addPauseEvent()
 
     }
     /** 
@@ -17,8 +19,22 @@ class FrequencyAnalyzer {
         player.loop = true;
         document.body.appendChild(player);
         player.play()
-        this.player = player
-        return this.player;
+        return player;
+    }
+
+    addPauseEvent() {
+        document.addEventListener('keyup', (e) => {
+            if (e.keyCode !== 32) {
+                return false;
+            }
+            if (!this.isPlaying) {
+                this.player.currentTime = 100
+                this.player.play();
+            } else {
+                this.player.pause();
+            }
+            this.isPlaying = !this.isPlaying;
+        })
     }
 
     /**
@@ -26,7 +42,7 @@ class FrequencyAnalyzer {
      * @param {HTML5 Audio} player - audio element playing the song
      */
     createAnalyzer(player) {
-        let context = new AudioContext();
+        let context = new (window.AudioContext || window.webkitAudioContext)();
         let source = context.createMediaElementSource(player);
         this.analyser = context.createAnalyser();
         this.analyser.fftSize = 64;
@@ -37,7 +53,10 @@ class FrequencyAnalyzer {
     }
 
     getFrequencies() {
-        //return this.analyser.getByteFrequencyData(this.frequencies)
+        if (this.isPlaying) {
+            this.analyser.getByteFrequencyData(this.frequencies);
+            return this.frequencies
+        }
     }
 
 

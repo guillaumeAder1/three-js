@@ -33,18 +33,18 @@ class Wire {
         scene.add(this.particles);
 
         // geometry deformation
-        // for (var i = 0; i < this.wireGeometry.vertices.length; i += 1) {
-        //     var scalar = 1 + Math.random() * 0.8 - 0.5;
-        //     this.wireGeometry.vertices[i].multiplyScalar(scalar)
+        for (var i = 0; i < this.wireGeometry.vertices.length; i += 1) {
+            var scalar = 1 + Math.random() * 0.8 - 0.5;
+            this.wireGeometry.vertices[i].multiplyScalar(scalar)
 
-        //     this.startVertices.push(this.wireGeometry.vertices[i].clone());
-        //     // this.icoGeometry.vertices[i].multiplyScalar(scalar)
+            //this.startVertices.push(this.wireGeometry.vertices[i].clone());
+            // this.icoGeometry.vertices[i].multiplyScalar(scalar)
 
-        // }
+        }
     }
 
     update() {
-        const rotationSpeed = 0.0002
+        const rotationSpeed = 0.002
         // this.mesh.rotation.x += rotationSpeed;
         // this.mesh.rotation.y += rotationSpeed;
         // this.mesh.rotation.z += rotationSpeed;
