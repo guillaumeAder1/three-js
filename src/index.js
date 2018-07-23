@@ -83,8 +83,12 @@ import FrequencyAnalyzer from './components/analyze/frequencyAnalyzer';
     function animate() {
 
         requestAnimationFrame(animate);
-        if (fa.getFrequencies()) {
-            objects.forEach(e => e.update())
+        let freq = fa.getFrequencies()
+        if (freq) {
+            let sum = freq.reduce((previous, current) => current += previous);
+            let avg = sum / freq.length;
+            // console.log()
+            objects.forEach(e => e.update(avg / 100000))
         }
         renderer.render(scene, camera);
     };
