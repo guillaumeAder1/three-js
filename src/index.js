@@ -12,6 +12,8 @@ import Cube from './components/graphic/cube'
 import Wire from './components/graphic/wire'
 import Speaker from './components/graphic/speaker'
 
+import FrequencyAnalyzer from './components/analyze/frequencyAnalyzer';
+
 
 (function () {
 
@@ -21,6 +23,8 @@ import Speaker from './components/graphic/speaker'
     const renderer = new WebGLRenderer();
     const light = buildLights(scene)
 
+    // analayse 
+    const analyzer = new FrequencyAnalyzer()
 
     //const cube = new Cube(scene, cubeCamera)
     const wire = new Wire(scene, cubeCamera)
@@ -76,7 +80,9 @@ import Speaker from './components/graphic/speaker'
      * refresh loop
      */
     function animate() {
-        requestAnimationFrame(animate);
+
+        requestAnimationFrame(animate.bind(this));
+        console.log(analyzer.frequencies)
         objects.forEach(e => e.update())
         renderer.render(scene, camera);
     };
