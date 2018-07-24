@@ -3,10 +3,11 @@
 
 class FrequencyAnalyzer {
     constructor() {
+        this.isPlaying = true;
         this.player = this.createAudioElement();
         this.data = this.createAnalyzer(this.player);
-        this.isPlaying = true
-        this.addPauseEvent()
+        document.addEventListener('keyup', (e) => this.addPauseEvent(e, this.player))
+        // this.addPauseEvent(this.player)
 
     }
     /** 
@@ -22,19 +23,19 @@ class FrequencyAnalyzer {
         return player;
     }
 
-    addPauseEvent() {
-        document.addEventListener('keyup', (e) => {
-            if (e.keyCode !== 32) {
-                return false;
-            }
-            if (!this.isPlaying) {
-                this.player.currentTime = 100
-                this.player.play();
-            } else {
-                this.player.pause();
-            }
-            this.isPlaying = !this.isPlaying;
-        })
+    addPauseEvent(e, player) {
+
+        if (e.keyCode !== 32) {
+            return false;
+        }
+        if (!this.isPlaying) {
+            player.currentTime = 100
+            player.play();
+        } else {
+            player.pause();
+        }
+        this.isPlaying = !this.isPlaying;
+
     }
 
     /**

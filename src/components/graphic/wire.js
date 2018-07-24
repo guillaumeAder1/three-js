@@ -21,6 +21,7 @@ class Wire {
             shading: THREE.FlatShading,
             wireframe: true
         });
+        // this.wireMaterial = false
 
         this.wireGeometry = new THREE.IcosahedronGeometry(1.8, 1);
         this.wireMesh = new THREE.Mesh(this.wireGeometry, this.wireMaterial);
@@ -41,6 +42,19 @@ class Wire {
 
     update(value = 0.0008) {
         const rotationSpeed = value
+
+        for (var i = 0; i < this.wireGeometry.vertices.length; i += 1) {
+            var scalar = 1 + Math.random() * 0.8 - 0.5;
+            var bool = ((Math.random() > 0.5) ? scalar / 100000 : 1)
+            console.log(scalar / 100000)
+
+            this.wireGeometry.vertices[i].x += this.wireGeometry.vertices[i].x + scalar
+            this.wireGeometry.vertices[i].y += this.wireGeometry.vertices[i].y + scalar
+            this.wireGeometry.vertices[i].z += this.wireGeometry.vertices[i].z + scalar
+            this.wireGeometry.verticesNeedUpdate = true
+
+        }
+
         // this.mesh.rotation.x += rotationSpeed;
         // this.mesh.rotation.y += rotationSpeed;
         // this.mesh.rotation.z += rotationSpeed;
